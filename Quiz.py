@@ -9,7 +9,7 @@ questions=[]
 currentQ=0
 totalQ=0
 smg=()
-
+timeq=15
 
 
 scrollerbox = Rect(0,0,870,80)
@@ -19,6 +19,7 @@ opt1= Rect(20,270,310,150)
 opt2= Rect(340,270,310,150)
 opt3= Rect(20,440,310,150)
 opt4= Rect(340,440,310,150)
+optlist= [opt1,opt2,opt3,opt4]
 skipbox= Rect(700,270,150,320)
 def draw():
     screen.fill("Black")
@@ -32,6 +33,14 @@ def draw():
     screen.draw.filled_rect(skipbox,"orange")
     smg=f"welcome to quizmaster. Q:{currentQ}:{totalQ}"
     screen.draw.textbox(smg,scrollerbox,color="white")
+    screen.draw.textbox(str(timeq),timerbox,color="white")
+    screen.draw.textbox(q[0],questionbox,color="white")
+    screen.draw.textbox("skip",skipbox,color = "white",angle = -90)
+    index=1
+    for i in optlist:
+        screen.draw.textbox(q[index],i,color ="white")
+        index += 1
+
 def update():
     scrollerbox.x-=2
     if scrollerbox.right<0:
@@ -44,10 +53,21 @@ def loadque():
             questions.append(i)
             totalQ +=1
 
+def nextque():
+    global currentQ
+    currentQ += 1
+    return questions.pop(0).split("|")
+
+
+
+
+
+
 
 
 
 loadque()
-print (questions)
+q=nextque()
+print (questions[0])
 pgzrun.go()
 
