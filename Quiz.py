@@ -69,11 +69,21 @@ def on_mouse_down(pos):
                 gameover()
 
         index+=1
+    if skipbox.collidepoint(pos):
+        skipanwser()
 
 def correctanwser():
     global timeq, score, q
     score += 1
     if questions:
+        q=nextque()
+        timeq=15
+    else :
+        gameover()
+        
+def skipanwser():
+    global timeq,q
+    if questions :
         q=nextque()
         timeq=15
     else :
@@ -95,6 +105,8 @@ def timer():
         timeq = timeq - 1
     else:
         gameover()
+
+
  
 
 
